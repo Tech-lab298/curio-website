@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="omelette-print-source" content="v1787150220935182 templates/edutok-architecture-deck/EdutokArchitectureDeck.dc.html">
+<style>*{-webkit-print-color-adjust:exact;print-color-adjust:exact}*{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}</style>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"><style>:root{--type-hero:150px;--type-title:64px;--type-subtitle:40px;--type-body:31px;--type-small:26px;--face:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--pad-top:88px;--pad-bottom:76px;--pad-x:100px;--gap-title:44px;--gap-item:22px}body{margin:0;background:#001d25}</style></helmet><x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+<section data-deck-active data-label="Title" data-screen-label="01" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary);border-bottom:1px solid var(--edutok-color-border);padding-bottom:20px"><span>Technical Architecture Overview</span><span>Codebase snapshot</span></div>
+<div style="display:flex;flex-direction:column;gap:36px">
+<h1 style="margin:0;font-size:var(--type-hero);line-height:0.92;letter-spacing:-0.045em;font-weight:600;color:var(--edutok-color-text-inverse)">EduTok</h1>
+<p style="margin:0;font-size:var(--type-subtitle);line-height:1.25;color:var(--edutok-color-accent);max-width:1180px">A Shorts feed that won't let you scroll past a quiz</p>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--gap-item);font-size:var(--type-body)">
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-primary)">—</span><span>Vertical, swipeable video feed (TikTok-style)</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-primary)">—</span><span>Flutter client + dual FastAPI/Kotlin backend</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-primary)">—</span><span>Gamified around forced recall, not pure engagement</span></li>
+</ul>
+</div>
+<div style="display:flex;gap:64px;border-top:1px solid var(--edutok-color-border);padding-top:30px">
+<div style="display:flex;flex-direction:column"><span style="font-size:56px;font-weight:600;color:var(--edutok-color-text-inverse);line-height:1.1">3,066</span><span style="font-size:var(--type-small);color:var(--edutok-color-text-muted)">videos seeded</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-size:56px;font-weight:600;color:var(--edutok-color-text-inverse);line-height:1.1">13</span><span style="font-size:var(--type-small);color:var(--edutok-color-text-muted)">commits</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-size:56px;font-weight:600;color:var(--edutok-color-text-inverse);line-height:1.1">8</span><span style="font-size:var(--type-small);color:var(--edutok-color-text-muted)">days active</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-size:56px;font-weight:600;color:var(--edutok-color-text-inverse);line-height:1.1">4</span><span style="font-size:var(--type-small);color:var(--edutok-color-text-muted)">API routers</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-size:56px;font-weight:600;color:var(--edutok-color-text-inverse);line-height:1.1">7</span><span style="font-size:var(--type-small);color:var(--edutok-color-text-muted)">DB tables</span></div>
+</div>
+</section>
+<section data-deck-active data-label="The Core Idea" data-screen-label="02" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-surface);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">02 / The Core Idea</div>
+<div style="display:grid;grid-template-columns:1.35fr 1fr;gap:100px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:40px">
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Challenge-Based Learning, not doomscrolling</h2>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--gap-item);font-size:var(--type-body);line-height:1.4">
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>Every 5 videos, a non-dismissible Trivia Rush quiz interrupts the feed</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>Questions are tagged to match the clip the viewer just watched</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>The app doesn't slow the feed down — it makes continuing to scroll conditional on proving retention</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>A direct structural check against pure engagement-driven scrolling</span></li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:var(--mono);font-size:var(--type-small);color:var(--edutok-color-text-muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px">Feed cadence</div>
+<div style="height:62px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-bg);border:1px solid var(--edutok-color-border)"></div>
+<div style="height:62px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-bg);border:1px solid var(--edutok-color-border)"></div>
+<div style="height:62px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-bg);border:1px solid var(--edutok-color-border)"></div>
+<div style="height:62px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-bg);border:1px solid var(--edutok-color-border)"></div>
+<div style="height:62px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-bg);border:1px solid var(--edutok-color-border)"></div>
+<div style="height:104px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-accent);display:flex;align-items:center;justify-content:center;font-size:var(--type-body);font-weight:600;color:var(--edutok-color-text-on-accent)">Trivia Rush</div>
+</div>
+</div>
+</section>
+<section data-deck-active data-label="Tech Stack" data-screen-label="03" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">03 / Tech Stack</div>
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Tech Stack</h2>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:44px;align-items:start;font-size:var(--type-small);line-height:1.4">
+<div style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--edutok-color-primary);padding-top:22px">
+<h3 style="margin:0;font-size:34px;font-weight:600;color:var(--edutok-color-text-inverse)">Client</h3>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+<li>Flutter, targeting Android, iOS, macOS, Windows, Linux, Web</li>
+<li>State managed via flutter_riverpod</li>
+<li>JWT persisted with shared_preferences</li>
+<li>Cross-platform YouTube embed via flutter_inappwebview (native) and the web package (browser)</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--edutok-color-accent);padding-top:22px">
+<h3 style="margin:0;font-size:34px;font-weight:600;color:var(--edutok-color-text-inverse)">Backend</h3>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+<li>FastAPI + SQLAlchemy</li>
+<li>SQLite by default, switches to Postgres via DATABASE_URL env var</li>
+<li>Trivia generation falls back to the Gemini API when no tagged question matches</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--edutok-color-violet);padding-top:22px">
+<h3 style="margin:0;font-size:34px;font-weight:600;color:var(--edutok-color-text-inverse)">Embedded backend</h3>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+<li>A second, hand-maintained Kotlin server inside the Android app</li>
+<li>Mirrors the Python API, with a bundled SQLite asset DB for fully offline use</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--edutok-color-warning);padding-top:22px">
+<h3 style="margin:0;font-size:34px;font-weight:600;color:var(--edutok-color-text-inverse)">Deploy / CI</h3>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+<li>Fly.io hosting via fly.toml</li>
+<li>GitHub Actions builds macOS and Windows desktop release bundles on tag push</li>
+</ul>
+</div>
+</div>
+</section>
+<section data-deck-active data-label="Architecture" data-screen-label="04" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">04 / Architecture</div>
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Single point of truth for data access</h2>
+<div style="display:flex;align-items:stretch;gap:24px;font-size:var(--type-small)">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:30px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);color:var(--edutok-color-primary);letter-spacing:0.12em;text-transform:uppercase;font-size:24px">Client</span><span style="font-size:32px;font-weight:600;color:var(--edutok-color-text-inverse)">Flutter Client</span></div>
+<div style="align-self:center;color:var(--edutok-color-text-secondary);font-size:34px">→</div>
+<div style="flex:1.2;display:flex;flex-direction:column;gap:12px;padding:30px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface-raised);border:1px solid var(--edutok-color-accent)"><span style="font-family:var(--mono);color:var(--edutok-color-accent);letter-spacing:0.12em;text-transform:uppercase;font-size:24px">Singleton</span><span style="font-size:32px;font-weight:600;color:var(--edutok-color-text-inverse);font-family:var(--mono)">api_client.dart</span><span style="color:var(--edutok-color-text-muted)">JWT via shared_preferences</span></div>
+<div style="align-self:center;color:var(--edutok-color-text-secondary);font-size:34px">→</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:30px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);color:var(--edutok-color-primary);letter-spacing:0.12em;text-transform:uppercase;font-size:24px">Server</span><span style="font-size:32px;font-weight:600;color:var(--edutok-color-text-inverse)">FastAPI backend</span><span style="color:var(--edutok-color-text-muted);font-family:var(--mono)">app/main.py</span></div>
+<div style="align-self:center;color:var(--edutok-color-text-secondary);font-size:34px">→</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:30px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);color:var(--edutok-color-primary);letter-spacing:0.12em;text-transform:uppercase;font-size:24px">Store</span><span style="font-size:32px;font-weight:600;color:var(--edutok-color-text-inverse)">SQLite / Postgres</span></div>
+</div>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--gap-item);font-size:var(--type-body)">
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>The client never talks to the database directly</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>Every request goes through a single HTTP client singleton (api_client.dart)</span></li>
+<li style="display:flex;gap:20px"><span style="color:var(--edutok-color-accent)">—</span><span>This singleton also decides which backend it's even pointed at</span></li>
+</ul>
+</section>
+<section data-deck-active data-label="Production Tradeoffs" data-screen-label="05" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">05 / Production Tradeoffs</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Production Tradeoffs (Made Deliberately)</h2>
+<p style="margin:0;font-size:var(--type-body);color:var(--edutok-color-text-muted)">Three tradeoffs, each with a stated upgrade path already sketched in the codebase</p>
+</div>
+<div style="display:flex;flex-direction:column;font-size:var(--type-body)">
+<div style="display:grid;grid-template-columns:1fr 90px 1fr;gap:40px;align-items:center;padding:28px 0;border-top:1px solid var(--edutok-color-border)"><span>In-memory rate limiting (5/min on login+signup, 20/min on guest auth)</span><span style="text-align:center;color:var(--edutok-color-text-secondary)">→</span><span style="color:var(--edutok-color-accent)">Redis</span></div>
+<div style="display:grid;grid-template-columns:1fr 90px 1fr;gap:40px;align-items:center;padding:28px 0;border-top:1px solid var(--edutok-color-border)"><span>SQLite as the default store</span><span style="text-align:center;color:var(--edutok-color-text-secondary)">→</span><span style="color:var(--edutok-color-accent)">Postgres; switch commands already commented into fly.toml</span></div>
+<div style="display:grid;grid-template-columns:1fr 90px 1fr;gap:40px;align-items:center;padding:28px 0;border-top:1px solid var(--edutok-color-border);border-bottom:1px solid var(--edutok-color-border)"><span>Wide-open CORS for local dev</span><span style="text-align:center;color:var(--edutok-color-text-secondary)">→</span><span style="color:var(--edutok-color-accent)">An origin allowlist</span></div>
+</div>
+<p style="margin:0;font-size:var(--type-small);line-height:1.45;color:var(--edutok-color-text-muted);border-left:2px solid var(--edutok-color-warning);padding-left:24px;max-width:1520px">Schema discrepancy note: the root-level schema.sql is a stale, aspirational Postgres+Supabase design and does not match what's running. The live schema is backend/app/models.py (SQLAlchemy, integer primary keys, SQLite types).</p>
+</section>
+<section data-deck-active data-label="Core Screens" data-screen-label="06" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">06 / Feature Modules</div>
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Feature Modules — Core Screens</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:36px;align-items:start;font-size:var(--type-small);line-height:1.45">
+<div style="display:flex;flex-direction:column;gap:22px;padding:36px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)">
+<span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">screens/auth_screen.dart</span>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px"><li>Signup, login, and guest auth entry points</li></ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px;padding:36px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)">
+<span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">screens/main_feed_screen.dart</span>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px"><li>The vertical PageView Shorts feed</li><li>Captures justWatchedVideoId in _onPageChanged before advancing — a fix for quizzes that used to reference the wrong video</li></ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px;padding:36px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)">
+<span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">widgets/trivia_rush_minigame.dart</span>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px"><li>The quiz UI itself, surfaced as a non-dismissible showModalBottomSheet</li></ul>
+</div>
+</div>
+</section>
+<section data-deck-active data-label="Browsing and Discovery" data-screen-label="07" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">07 / Feature Modules</div>
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Feature Modules — Browsing &amp; Discovery</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:36px;align-items:start;font-size:var(--type-small);line-height:1.45">
+<div style="display:flex;flex-direction:column;gap:22px;padding:36px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)">
+<span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">screens/home_screen.dart</span>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px"><li>Post-auth shell with bottom nav: Short Videos, Videos, Search, Stats</li><li>Tabs use a deliberate mount strategy — the feed unmounts to kill autoplay, Stats remounts fresh</li></ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px;padding:36px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)">
+<span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">screens/videos_screen.dart</span>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px"><li>Long-form, YouTube-style browsing list, plus a detail page with an interactive player mode</li></ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px;padding:36px;border-radius:var(--edutok-radius-lg);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)">
+<span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">screens/search_screen.dart</span>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px"><li>Searches across title, channel, tags, and description</li></ul>
+</div>
+</div>
+</section>
+<section data-deck-active data-label="Backend API Surface" data-screen-label="08" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-surface);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:36px">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">08 / Backend API Surface</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Backend API Surface</h2>
+<p style="margin:0;font-size:var(--type-body);color:var(--edutok-color-text-muted)">Four routers, mounted in main.py</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;column-gap:80px;font-size:25px;line-height:1.35">
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-success);text-align:right">POST</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/auth/signup, /auth/login</span><span style="color:var(--edutok-color-text-muted)"> — rate-limited, 5/min</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">GET/POST</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/videos/{id}/comments</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-success);text-align:right">POST</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/auth/guest</span><span style="color:var(--edutok-color-text-muted)"> — rate-limited, 20/min</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">GET</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/trivia/random</span><span style="color:var(--edutok-color-text-muted)"> — matches via topic_keywords, falls back to Gemini</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">GET</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/videos</span><span style="color:var(--edutok-color-text-muted)"> — paginated, kind=short|long|all</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-success);text-align:right">POST</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/trivia/{question_id}/submit</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">GET</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/videos/search</span><span style="color:var(--edutok-color-text-muted)"> — ?q= across title/channel/tags/description</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">POST/GET</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/progress/sync, /progress/me</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border);border-bottom:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">POST/GET</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/videos/{id}/like, /like-status</span></span></div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:19px 0;border-top:1px solid var(--edutok-color-border);border-bottom:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:24px;letter-spacing:0.06em;color:var(--edutok-color-primary);text-align:right">GET</span><span><span style="font-family:var(--mono);color:var(--edutok-color-text-inverse)">/progress/stats</span><span style="color:var(--edutok-color-text-muted)"> — streaks, accuracy over time, per-topic mastery</span></span></div>
+</div>
+</section>
+<section data-deck-active data-label="Database Schema" data-screen-label="09" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:28px">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">09 / Database Schema</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Database Schema</h2>
+<p style="margin:0;font-size:var(--type-body);color:var(--edutok-color-text-muted)">Live schema, from backend/app/models.py — 7 tables</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;font-size:24px;line-height:1.35">
+<div style="grid-column:span 2;display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">videos</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">id, video_id, title, channel_title, tags, likes, comment_count, description, thumbnail_link, is_short, duration_seconds</span></div>
+<div style="grid-column:span 2;display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">users</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">id, username, email, password_hash, is_guest, created_at</span></div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">trivia_questions</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">question, option_a..d, correct_answer, topic_keywords</span></div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">trivia_scores</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">user_id, question_id, score, created_at</span></div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">watch_progress</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">user_id, total_watch_seconds, last_synced_at</span></div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">comments</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">video_id, user_id, text, created_at</span></div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;border-radius:var(--edutok-radius-md);background:var(--edutok-color-surface);border:1px solid var(--edutok-color-border)"><span style="font-family:var(--mono);font-size:27px;color:var(--edutok-color-accent)">video_likes</span><span style="font-family:var(--mono);color:var(--edutok-color-text-muted)">video_id, user_id, created_at</span></div>
+</div>
+<p style="margin:0;font-size:var(--type-small);line-height:1.45;color:var(--edutok-color-text-muted);border-left:2px solid var(--edutok-color-warning);padding-left:24px;max-width:1560px">Note: trivia_questions.topic_keywords is a comma-separated field doing double duty — it matches questions to the video just watched, and groups accuracy into topics on the Stats screen</p>
+</section>
+<section data-deck-active data-label="Development Timeline" data-screen-label="10" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-bg);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">10 / Development Timeline</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Development Timeline</h2>
+<p style="margin:0;font-size:var(--type-body);color:var(--edutok-color-text-muted)">13 commits, entirely within an 8-day window</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:28px;font-size:25px;line-height:1.4">
+<div style="display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--edutok-color-border-strong);padding-top:22px"><span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-text-inverse)">Aug 6</span><span>Initial commit: Flutter app + FastAPI backend scaffolded together</span></div>
+<div style="display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--edutok-color-border-strong);padding-top:22px"><span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-text-inverse)">Aug 7-8</span><span>Correctness fixes: embedded-backend crash fix, trivia-trigger bug fixed, Shorts-only fetch scoping</span></div>
+<div style="display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--edutok-color-border-strong);padding-top:22px"><span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-text-inverse)">Aug 9</span><span>Test coverage: 26-case pytest suite added</span></div>
+<div style="display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--edutok-color-border-strong);padding-top:22px"><span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-text-inverse)">Aug 10-12</span><span>Docs &amp; desktop CI: architecture writeup added, GitHub Actions desktop builds</span></div>
+<div style="display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--edutok-color-border-strong);padding-top:22px"><span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-text-inverse)">Aug 13</span><span>Progress stats: streaks, accuracy-over-time, topic mastery shipped</span></div>
+<div style="display:flex;flex-direction:column;gap:18px;border-top:2px solid var(--edutok-color-accent);padding-top:22px"><span style="font-family:var(--mono);font-size:29px;color:var(--edutok-color-accent)">Aug 14 (latest)</span><span>Bottom-nav overhaul: long-form video browsing and search added; Kotlin embedded backend brought to parity with /progress/stats</span></div>
+</div>
+</section>
+<section data-deck-active data-label="Code Health" data-screen-label="11" style="box-sizing:border-box;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);background:var(--edutok-color-surface);font-family:var(--face);color:var(--edutok-color-text-body);display:flex;flex-direction:column;gap:var(--gap-title)">
+<div style="font-family:var(--mono);font-size:var(--type-small);letter-spacing:0.18em;text-transform:uppercase;color:var(--edutok-color-text-secondary)">11 / Code Health &amp; Notes</div>
+<h2 style="margin:0;font-size:var(--type-title);line-height:1.05;letter-spacing:-0.025em;font-weight:600;color:var(--edutok-color-text-inverse)">Code Health &amp; Notes</h2>
+<div style="display:grid;grid-template-columns:1fr 1.25fr;gap:90px;align-items:start;font-size:var(--type-small);line-height:1.45">
+<div style="display:flex;flex-direction:column;gap:26px">
+<h3 style="margin:0;font-size:36px;font-weight:600;color:var(--edutok-color-success)">Clean by design</h3>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px">
+<li style="display:flex;gap:18px"><span style="color:var(--edutok-color-success)">—</span><span>Zero TODO, FIXME, or HACK comments anywhere in lib/ or backend/app/</span></li>
+<li style="display:flex;gap:18px"><span style="color:var(--edutok-color-success)">—</span><span>What's scoped out — rate limiting, Postgres, CORS — is scoped out on purpose and documented, not abandoned mid-thought</span></li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:26px">
+<h3 style="margin:0;font-size:36px;font-weight:600;color:var(--edutok-color-warning)">Caveats</h3>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px">
+<li style="display:flex;gap:18px"><span style="color:var(--edutok-color-warning)">—</span><span>Root README.md is now where the official documentation lives, alongside ARCHITECTURE_WRITEUP.md</span></li>
+<li style="display:flex;gap:18px"><span style="color:var(--edutok-color-warning)">—</span><span>Feed-side error handling on pagination, likes, and comments is intentionally best-effort and silent</span></li>
+<li style="display:flex;gap:18px"><span style="color:var(--edutok-color-warning)">—</span><span>CLAUDE.md carries a standing note to check the Kotlin backend whenever the Python backend grows a new endpoint</span></li>
+<li style="display:flex;gap:18px"><span style="color:var(--edutok-color-warning)">—</span><span>backend/.env and backend/edutok.db are correctly gitignored</span></li>
+</ul>
+</div>
+</div>
+</section>
+</x-import>
+</x-dc>
+</body>
+</html>

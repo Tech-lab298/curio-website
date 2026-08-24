@@ -1,0 +1,565 @@
+/* src/tokens/tokens.css */
+:root {
+  --edutok-color-bg: #002b36;
+  --edutok-color-surface: #073642;
+  --edutok-color-surface-raised: #0b4351;
+  --edutok-color-text-secondary: #586e75;
+  --edutok-color-text-muted: #657b83;
+  --edutok-color-text-body: #839496;
+  --edutok-color-text-emphasis: #93a1a1;
+  --edutok-color-text-inverse: #eee8d5;
+  --edutok-color-text-on-accent: #fdf6e3;
+  --edutok-color-primary: #268bd2;
+  --edutok-color-primary-hover: #2f9bea;
+  --edutok-color-accent: #2aa198;
+  --edutok-color-warning: #b58900;
+  --edutok-color-danger: #dc322f;
+  --edutok-color-success: #859900;
+  --edutok-color-magenta: #d33682;
+  --edutok-color-violet: #6c71c4;
+  --edutok-color-orange: #cb4b16;
+  --edutok-color-border: rgba(88, 110, 117, 0.4);
+  --edutok-color-border-strong: rgba(88, 110, 117, 0.7);
+  --edutok-space-xs: 4px;
+  --edutok-space-sm: 8px;
+  --edutok-space-md: 16px;
+  --edutok-space-lg: 24px;
+  --edutok-space-xl: 32px;
+  --edutok-radius-sm: 6px;
+  --edutok-radius-md: 10px;
+  --edutok-radius-lg: 16px;
+  --edutok-radius-pill: 999px;
+  --edutok-font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  --edutok-font-size-xs: 12px;
+  --edutok-font-size-sm: 13px;
+  --edutok-font-size-md: 15px;
+  --edutok-font-size-lg: 20px;
+  --edutok-font-size-xl: 28px;
+  --edutok-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --edutok-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* src/components/Button/Button.css */
+.edutok-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--edutok-space-xs);
+  font-family: var(--edutok-font-family);
+  font-weight: 600;
+  border-radius: var(--edutok-radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+  white-space: nowrap;
+}
+.edutok-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.edutok-button--sm {
+  height: 32px;
+  padding: 0 var(--edutok-space-sm);
+  font-size: var(--edutok-font-size-xs);
+}
+.edutok-button--md {
+  height: 40px;
+  padding: 0 var(--edutok-space-md);
+  font-size: var(--edutok-font-size-sm);
+}
+.edutok-button--lg {
+  height: 48px;
+  padding: 0 var(--edutok-space-lg);
+  font-size: var(--edutok-font-size-md);
+}
+.edutok-button--fullWidth {
+  width: 100%;
+}
+.edutok-button--primary {
+  background: var(--edutok-color-primary);
+  color: var(--edutok-color-text-on-accent);
+}
+.edutok-button--primary:not(:disabled):hover {
+  background: var(--edutok-color-primary-hover);
+}
+.edutok-button--secondary {
+  background: var(--edutok-color-surface-raised);
+  color: var(--edutok-color-text-emphasis);
+  border-color: var(--edutok-color-border);
+}
+.edutok-button--secondary:not(:disabled):hover {
+  border-color: var(--edutok-color-border-strong);
+}
+.edutok-button--ghost {
+  background: transparent;
+  color: var(--edutok-color-accent);
+}
+.edutok-button--ghost:not(:disabled):hover {
+  background: rgba(42, 161, 152, 0.12);
+}
+.edutok-button--danger {
+  background: var(--edutok-color-danger);
+  color: var(--edutok-color-text-on-accent);
+}
+.edutok-button--danger:not(:disabled):hover {
+  opacity: 0.9;
+}
+
+/* src/components/IconButton/IconButton.css */
+.edutok-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--edutok-radius-pill);
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--edutok-color-text-emphasis);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.edutok-icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.edutok-icon-button--sm {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+}
+.edutok-icon-button--md {
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+}
+.edutok-icon-button--lg {
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+}
+.edutok-icon-button:not(:disabled):hover {
+  background: rgba(147, 161, 161, 0.12);
+}
+.edutok-icon-button--active {
+  color: var(--edutok-color-accent);
+}
+
+/* src/components/Input/Input.css */
+.edutok-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--edutok-space-xs);
+  font-family: var(--edutok-font-family);
+}
+.edutok-input-label {
+  font-size: var(--edutok-font-size-xs);
+  color: var(--edutok-color-text-body);
+}
+.edutok-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--edutok-space-xs);
+  background: rgba(0, 43, 54, 0.4);
+  border: 1px solid var(--edutok-color-border);
+  border-radius: var(--edutok-radius-md);
+  padding: 0 var(--edutok-space-sm);
+}
+.edutok-input-wrap:focus-within {
+  border-color: var(--edutok-color-primary);
+}
+.edutok-input-wrap--error {
+  border-color: var(--edutok-color-danger);
+}
+.edutok-input {
+  flex: 1;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--edutok-color-text-emphasis);
+  font-size: var(--edutok-font-size-md);
+  outline: none;
+}
+.edutok-input::placeholder {
+  color: var(--edutok-color-text-secondary);
+}
+.edutok-input-icon {
+  color: var(--edutok-color-text-body);
+  display: flex;
+  align-items: center;
+}
+.edutok-input-error {
+  font-size: var(--edutok-font-size-xs);
+  color: var(--edutok-color-danger);
+}
+
+/* src/components/Card/Card.css */
+.edutok-card {
+  background: var(--edutok-color-surface);
+  border: 1px solid var(--edutok-color-border);
+  border-radius: var(--edutok-radius-lg);
+  box-shadow: var(--edutok-shadow-sm);
+}
+.edutok-card--padding-sm {
+  padding: var(--edutok-space-sm);
+}
+.edutok-card--padding-md {
+  padding: var(--edutok-space-md);
+}
+.edutok-card--padding-lg {
+  padding: var(--edutok-space-lg);
+}
+.edutok-card--padding-none {
+  padding: 0;
+}
+.edutok-card--interactive {
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.edutok-card--interactive:hover {
+  border-color: var(--edutok-color-border-strong);
+  transform: translateY(-1px);
+}
+
+/* src/components/Badge/Badge.css */
+.edutok-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--edutok-space-xs);
+  height: 22px;
+  padding: 0 var(--edutok-space-sm);
+  border-radius: var(--edutok-radius-pill);
+  font-family: var(--edutok-font-family);
+  font-size: var(--edutok-font-size-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.edutok-badge--default {
+  background: rgba(147, 161, 161, 0.14);
+  color: var(--edutok-color-text-emphasis);
+}
+.edutok-badge--primary {
+  background: rgba(38, 139, 210, 0.16);
+  color: var(--edutok-color-primary);
+}
+.edutok-badge--success {
+  background: rgba(133, 153, 0, 0.16);
+  color: var(--edutok-color-success);
+}
+.edutok-badge--warning {
+  background: rgba(181, 137, 0, 0.18);
+  color: var(--edutok-color-warning);
+}
+.edutok-badge--danger {
+  background: rgba(220, 50, 47, 0.16);
+  color: var(--edutok-color-danger);
+}
+
+/* src/components/Chip/Chip.css */
+.edutok-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 var(--edutok-space-md);
+  border-radius: var(--edutok-radius-pill);
+  border: 1px solid var(--edutok-color-border);
+  background: transparent;
+  color: var(--edutok-color-text-body);
+  font-family: var(--edutok-font-family);
+  font-size: var(--edutok-font-size-sm);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+.edutok-chip:hover {
+  border-color: var(--edutok-color-border-strong);
+}
+.edutok-chip--selected {
+  background: var(--edutok-color-accent);
+  border-color: var(--edutok-color-accent);
+  color: var(--edutok-color-text-on-accent);
+  font-weight: 600;
+}
+
+/* src/components/Avatar/Avatar.css */
+.edutok-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--edutok-color-surface-raised);
+  color: var(--edutok-color-text-emphasis);
+  font-family: var(--edutok-font-family);
+  font-weight: 600;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.edutok-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.edutok-avatar--sm {
+  width: 28px;
+  height: 28px;
+  font-size: var(--edutok-font-size-xs);
+}
+.edutok-avatar--md {
+  width: 40px;
+  height: 40px;
+  font-size: var(--edutok-font-size-sm);
+}
+.edutok-avatar--lg {
+  width: 64px;
+  height: 64px;
+  font-size: var(--edutok-font-size-lg);
+}
+
+/* src/components/Divider/Divider.css */
+.edutok-divider--horizontal {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background: var(--edutok-color-border);
+}
+.edutok-divider--vertical {
+  width: 1px;
+  align-self: stretch;
+  border: none;
+  background: var(--edutok-color-border);
+}
+
+/* src/components/Text/Text.css */
+.edutok-text {
+  font-family: var(--edutok-font-family);
+  margin: 0;
+}
+.edutok-text--h1 {
+  font-size: var(--edutok-font-size-xl);
+  font-weight: 700;
+  color: var(--edutok-color-text-inverse);
+}
+.edutok-text--h2 {
+  font-size: var(--edutok-font-size-lg);
+  font-weight: 700;
+  color: var(--edutok-color-text-inverse);
+}
+.edutok-text--h3 {
+  font-size: var(--edutok-font-size-md);
+  font-weight: 600;
+  color: var(--edutok-color-text-emphasis);
+}
+.edutok-text--body {
+  font-size: var(--edutok-font-size-md);
+  font-weight: 400;
+  color: var(--edutok-color-text-body);
+  line-height: 1.5;
+}
+.edutok-text--caption {
+  font-size: var(--edutok-font-size-xs);
+  font-weight: 400;
+  color: var(--edutok-color-text-secondary);
+}
+.edutok-text--label {
+  font-size: var(--edutok-font-size-xs);
+  font-weight: 600;
+  color: var(--edutok-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* src/components/Modal/Modal.css */
+.edutok-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 43, 54, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.edutok-modal {
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: var(--edutok-color-surface);
+  border: 1px solid var(--edutok-color-border);
+  border-radius: var(--edutok-radius-lg);
+  box-shadow: var(--edutok-shadow-md);
+  padding: var(--edutok-space-lg);
+  font-family: var(--edutok-font-family);
+}
+.edutok-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--edutok-space-md);
+}
+.edutok-modal-body {
+  color: var(--edutok-color-text-body);
+  font-size: var(--edutok-font-size-md);
+}
+.edutok-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--edutok-space-sm);
+  margin-top: var(--edutok-space-lg);
+}
+
+/* src/components/Spinner/Spinner.css */
+.edutok-spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: 3px solid rgba(147, 161, 161, 0.2);
+  border-top-color: var(--edutok-color-accent);
+  animation: edutok-spin 0.7s linear infinite;
+}
+.edutok-spinner--sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+.edutok-spinner--md {
+  width: 28px;
+  height: 28px;
+}
+.edutok-spinner--lg {
+  width: 44px;
+  height: 44px;
+  border-width: 4px;
+}
+@keyframes edutok-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* src/components/ProgressBar/ProgressBar.css */
+.edutok-progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--edutok-radius-pill);
+  background: rgba(147, 161, 161, 0.16);
+  overflow: hidden;
+}
+.edutok-progress-fill {
+  height: 100%;
+  border-radius: var(--edutok-radius-pill);
+  background: var(--edutok-color-accent);
+  transition: width 0.2s ease;
+}
+.edutok-progress-fill--warning {
+  background: var(--edutok-color-warning);
+}
+.edutok-progress-fill--danger {
+  background: var(--edutok-color-danger);
+}
+
+/* src/components/Switch/Switch.css */
+.edutok-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--edutok-space-sm);
+  font-family: var(--edutok-font-family);
+  font-size: var(--edutok-font-size-sm);
+  color: var(--edutok-color-text-body);
+  cursor: pointer;
+}
+.edutok-switch-track {
+  width: 40px;
+  height: 22px;
+  border-radius: var(--edutok-radius-pill);
+  background: rgba(147, 161, 161, 0.2);
+  position: relative;
+  transition: background-color 0.15s ease;
+  flex-shrink: 0;
+}
+.edutok-switch-track--checked {
+  background: var(--edutok-color-accent);
+}
+.edutok-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--edutok-color-text-on-accent);
+  transition: transform 0.15s ease;
+}
+.edutok-switch-track--checked .edutok-switch-thumb {
+  transform: translateX(18px);
+}
+.edutok-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+/* src/components/VideoCard/VideoCard.css */
+.edutok-video-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--edutok-space-sm);
+  cursor: pointer;
+  font-family: var(--edutok-font-family);
+  width: 100%;
+}
+.edutok-video-card-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--edutok-radius-md);
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.edutok-video-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.edutok-video-card-duration {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--edutok-color-text-inverse);
+  font-size: var(--edutok-font-size-xs);
+  padding: 1px 6px;
+  border-radius: var(--edutok-radius-sm);
+}
+.edutok-video-card-kind {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+.edutok-video-card-title {
+  color: var(--edutok-color-text-inverse);
+  font-size: var(--edutok-font-size-md);
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.edutok-video-card-meta {
+  color: var(--edutok-color-text-secondary);
+  font-size: var(--edutok-font-size-xs);
+}
+
+/* src/styles.css */
+body {
+  background: var(--edutok-color-bg);
+}
